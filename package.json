@@ -1,0 +1,53 @@
+{
+  "name": "newrelic-mcp-server",
+  "description": "MCP server allowing AI agent to query New Relic for debugging incidents",
+  "version": "1.0.0",
+  "type": "module",
+  "module": "index.ts",
+  "bin": {
+    "nr-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && chmod 755 dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "biome lint --write src",
+    "format": "biome format --write src",
+    "check": "biome check --write src",
+    "create-tool": "bun scripts/create-tool.ts"
+  },
+  "keywords": [
+    "new-relic",
+    "mcp"
+  ],
+  "author": {
+    "name": "Daniel Nguyen",
+    "github": "https://github.com/ducduyn31"
+  },
+  "git": {
+    "type": "git",
+    "url": "https://github.com/ducduyn31/nr-mcp.git"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.2",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.13.14",
+    "standard-version": "^9.5.0",
+    "tsx": "^4.19.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "zod": "^3.24.2"
+  }
+}
