@@ -16,7 +16,13 @@
     "lint": "biome lint --write src",
     "format": "biome format --write src",
     "check": "biome check --write src",
-    "create-tool": "bun scripts/create-tool.ts"
+    "create-tool": "node scripts/create-tool.ts",
+    "test-server": "tsx scripts/test-server.ts",
+    "test-logger": "tsx scripts/test-logger.ts",
+    "start": "node dist/index.js",
+    "watch": "nodemon --watch src --ext ts --exec \"npm run build\"",
+    "inspector": "mcp-inspector",
+    "dev": "concurrently \"npm run watch\" \"npm run inspector\""
   },
   "keywords": [
     "new-relic",
@@ -34,7 +40,10 @@
   "packageManager": "pnpm@10.6.2",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@modelcontextprotocol/inspector": "^0.7.0",
     "@types/node": "^22.13.14",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
     "standard-version": "^9.5.0",
     "tsx": "^4.19.3"
   },
@@ -48,6 +57,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
+    "chalk": "^5.4.1",
     "zod": "^3.24.2"
   }
 }

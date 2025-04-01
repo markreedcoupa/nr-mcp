@@ -6,10 +6,12 @@
     "moduleDetection": "force",
     "allowJs": true,
 
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
     "verbatimModuleSyntax": true,
-    "noEmit": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
 
     "strict": true,
     "noFallthroughCasesInSwitch": true,
