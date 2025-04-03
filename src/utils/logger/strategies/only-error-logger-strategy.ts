@@ -1,43 +1,30 @@
 /**
- * Text logger strategy that uses chalk for colorful output
+ * Only Error logger strategy that only logs error level and above
  */
 import chalk from "chalk";
 import { LogLevel, type LoggerStrategy } from "../types.js";
 
 /**
- * Text logger strategy that uses chalk for colorful output
+ * Only Error logger strategy that only logs error level and above
+ * Ignores all log levels below ERROR (DEBUG, INFO, NOTICE, WARNING)
  */
-export class TextLoggerStrategy implements LoggerStrategy {
+export class OnlyErrorLoggerStrategy implements LoggerStrategy {
 	log(level: LogLevel, message: string, ...args: unknown[]): void {
+		// Only log ERROR, CRITICAL, ALERT, and EMERGENCY levels
+		// Ignore DEBUG, INFO, NOTICE, and WARNING levels
+
 		const timestamp = new Date().toISOString();
 
 		switch (level) {
+			// Ignore lower log levels
 			case LogLevel.DEBUG:
-				if (process.env.DEBUG) {
-					console.debug(
-						`${chalk.gray(timestamp)} ${chalk.yellow("[DEBUG]")} ${chalk.cyan(message)}`,
-						...args,
-					);
-				}
-				break;
 			case LogLevel.INFO:
-				console.log(
-					`${chalk.gray(timestamp)} ${chalk.blue("[INFO]")} ${message}`,
-					...args,
-				);
-				break;
 			case LogLevel.NOTICE:
-				console.log(
-					`${chalk.gray(timestamp)} ${chalk.green("[NOTICE]")} ${message}`,
-					...args,
-				);
-				break;
 			case LogLevel.WARNING:
-				console.warn(
-					`${chalk.gray(timestamp)} ${chalk.yellow("[WARNING]")} ${message}`,
-					...args,
-				);
+				// Do nothing for these levels
 				break;
+
+			// Only log error levels and above
 			case LogLevel.ERROR:
 				console.error(
 					`${chalk.gray(timestamp)} ${chalk.red("[ERROR]")} ${chalk.red(message)}`,
