@@ -7,6 +7,7 @@ const requiredEnvVars = [
 	"NEW_RELIC_API_KEY",
 	"NEW_RELIC_ACCOUNT_ID",
 	"NEW_RELIC_REGION",
+	"NEW_RELIC_LOG_PARTITIONS",
 ];
 
 async function main() {
@@ -25,6 +26,7 @@ async function main() {
 				apiKey: process.env.NEW_RELIC_API_KEY as string,
 				accountId: process.env.NEW_RELIC_ACCOUNT_ID as string,
 				region: process.env.NEW_RELIC_REGION as "US" | "EU",
+				logPartitions: process.env.NEW_RELIC_LOG_PARTITIONS as string,
 			},
 		});
 

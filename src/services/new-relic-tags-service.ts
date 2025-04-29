@@ -114,7 +114,7 @@ export class NewRelicTagsService extends NewRelicBaseService {
 
 			const variables = {
 				accountId: Number.parseInt(this.accountId, 10),
-				query: nrqlQuery,
+				query: nrqlQuery.replaceAll("FROM Log ",`FROM ${this.logPartitions} `),
 			};
 
 			const result = await this.executeNerdGraphQuery<{

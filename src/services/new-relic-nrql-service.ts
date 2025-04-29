@@ -186,10 +186,10 @@ export class NewRelicNrqlService extends NewRelicBaseService {
 
 			// GraphQL query to execute NRQL
 			const nrqlGraphQLQuery = gql`
-				query ($accountId: Int!, $nrqlQuery: Nrql!, $timeout: Seconds) {
+				query ($accountId: Int!, $query: Nrql!, $timeout: Seconds) {
 					actor {
 						account(id: $accountId) {
-							nrql(query: $nrqlQuery, timeout: $timeout) {
+							nrql(query: $query, timeout: $timeout) {
 								results
 								metadata {
 									facets
@@ -207,7 +207,7 @@ export class NewRelicNrqlService extends NewRelicBaseService {
 			// Execute the GraphQL query
 			const variables = {
 				accountId: Number.parseInt(this.accountId, 10),
-				nrqlQuery: query,
+				query: query.replaceAll("FROM Log ",`FROM ${this.logPartitions} `),
 				timeout,
 			};
 

@@ -122,7 +122,7 @@ export class NewRelicLogsService extends NewRelicBaseService {
 
 			const variables = {
 				accountId: Number.parseInt(this.accountId, 10),
-				query,
+				query: query.replaceAll("FROM Log ",`FROM ${this.logPartitions} `),
 			};
 
 			const startTime = Date.now();

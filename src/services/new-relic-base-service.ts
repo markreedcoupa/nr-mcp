@@ -19,6 +19,12 @@ export interface NewRelicApiConfig {
 	 * New Relic region (defaults to US)
 	 */
 	region?: "US" | "EU";
+
+	/**
+	 * New Relic Log Partitions
+	 */
+	logPartitions?: string;
+
 }
 
 /**
@@ -27,6 +33,7 @@ export interface NewRelicApiConfig {
 export abstract class NewRelicBaseService {
 	protected readonly apiKey: string;
 	protected readonly accountId: string;
+	protected readonly logPartitions: string;
 	protected readonly graphQLClient: GraphQLClient;
 
 	/**
@@ -36,6 +43,7 @@ export abstract class NewRelicBaseService {
 	constructor(config: NewRelicApiConfig) {
 		this.apiKey = config.apiKey;
 		this.accountId = config.accountId;
+		this.logPartitions = config.logPartitions ?? "Log";
 
 		// Determine the NerdGraph URL based on the region
 		const nerdGraphUrl =
@@ -53,6 +61,10 @@ export abstract class NewRelicBaseService {
 
 		defaultLogger.info(
 			`Initialized New Relic API service for account ${this.accountId}`,
+		);
+
+		defaultLogger.info(
+			`Initialized New Relic API service for log partitions ${this.logPartitions}`,
 		);
 	}
 
